@@ -88,13 +88,15 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				    <version>${project.parent.version}</version>
 				<configuration>
 					<excludes>
 						<exclude>
