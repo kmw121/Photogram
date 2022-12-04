@@ -18,16 +18,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(length = 20,unique = true)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
     private String website;
+
+    @Column(nullable = false)
     private String email;
+
     private String phone;
+
+    @Column(nullable = false)
     private String name;
+
     private String gender;
 
     private String profileImageUrl;
+
     private String role;
 
     private LocalDateTime createDate;
