@@ -1,6 +1,6 @@
-package com.cos.photogramstart.domain.image;
+package com.cos.photogramstart.domain.likes;
 
-import com.cos.photogramstart.domain.likes.Likes;
+import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -10,42 +10,40 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-public class Image {
-
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "likes_uk",
+                        columnNames = {"imageId","userId"}
+                )
+        }
+)
+public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String caption;
-    private String postImageUrl;
 
-    @JsonIgnoreProperties({"images","password"})
-    @JoinColumn(name = "userId")
+    @JoinColumn(name="imageId")
     @ManyToOne
-    private User user;
+    private Image image;
+
+    @JsonIgnoreProperties({"images"})
+    @JoinColumn(name="userId")
+    @ManyToOne
+    private User User;
 
     private LocalDateTime createDate;
-
-    @JsonIgnoreProperties({"image"})
-    @OneToMany(mappedBy = "image")
-    private List<Likes> likes;
-
-    @Transient
-    private boolean likesState;
-
-    @Transient
-    private int likeCount;
 
     @PrePersist
     public void setCreateDate() {
         this.createDate = LocalDateTime.now();
     }
-
 }
+
