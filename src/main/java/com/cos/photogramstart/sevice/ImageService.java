@@ -58,4 +58,10 @@ public class ImageService {
         Image image = imageUploadDto.toEntity(imageFileName,principalDetails.getUser());
         imageRepository.save(image);
     }
+
+    @Transactional(readOnly = true)
+    public List<Image> popular(){
+        return imageRepository.mPopular();
+    }
+
 }
