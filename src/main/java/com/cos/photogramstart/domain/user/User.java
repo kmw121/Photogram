@@ -51,6 +51,24 @@ public class User {
 
     private LocalDateTime createDate;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", website='" + website + '\'' +
+                ", bio='" + bio + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", profileImageUrl='" + profileImageUrl + '\'' +
+                ", role='" + role + '\'' +
+                ", createDate=" + createDate +
+                '}';
+    }
+
     @PrePersist
     public void setCreateDate() {
         this.createDate = LocalDateTime.now();
