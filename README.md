@@ -1,99 +1,59 @@
-# 포토그램 - 인스타그램 클론 코딩
+# :bar_chart: 포토그램 (클론코딩)
 
-### STS 툴 버그가 발견되었습니다.
-- 아래 주소로 가서 4.0.6 버전으로 설치해주세요. 아니면 의존성 다운로드 79프로에서 무한루프가 발생합니다.
-- https://github.com/spring-projects/sts4/wiki/Previous-Versions
+인스타그램 클론 코딩
 
-### STS 툴에 세팅하기 - 플러그인 설정
-- https://blog.naver.com/getinthere/222322821611
+jpa와 스프링 부트를 통해 직접 웹 사이트를 만들어 보고 싶어 인스타그램 클론코딩을 진행하게 되었습니다.  
+평소에 학습하고 싶었던 스프링 시큐리티와 OAuth2를 통해 로그인 기능을 구현 할 수 있었습니다.  
+핸들러와 AOP를 통해 예외처리를 한 곳에서 처리할 수 있도록 구현하였습니다.  
 
-### 의존성
+# 제작기간
+2022년 12월 5일 ~ 2022년 12월 12일
 
-- Sring Boot DevTools
-- Lombok
+# 사용기술
+- Java 11
+- Spring Boot 2.4.5
+- Maven
 - Spring Data JPA
-- MariaDB Driver
+- MariaDB
 - Spring Security
-- Spring Web
-- oauth2-client
+- OAuth2
 
-```xml
-<!-- 시큐리티 태그 라이브러리 -->
-<dependency>
-	<groupId>org.springframework.security</groupId>
-	<artifactId>spring-security-taglibs</artifactId>
-</dependency>
+# ERD 설계
 
-<!-- JSP 템플릿 엔진 -->
-<dependency>
-	<groupId>org.apache.tomcat</groupId>
-	<artifactId>tomcat-jasper</artifactId>
-	<version>9.0.43</version>
-</dependency>
+![erd](https://user-images.githubusercontent.com/115692844/214132241-e928536e-a098-4135-86e8-459a0f290ea0.png)
 
-<!-- JSTL -->
-<dependency>
-	<groupId>javax.servlet</groupId>
-	<artifactId>jstl</artifactId>
-</dependency>
-```
+# 핵심 기능
 
-### 데이터베이스
+- 로그인/회원가입  
 
-```sql
-create user 'cos'@'%' identified by 'cos1234';
-GRANT ALL PRIVILEGES ON *.* TO 'cos'@'%';
-create database photogram;
-```
+![로그인](https://user-images.githubusercontent.com/115692844/214156809-9f1afd5b-e759-4cb1-95eb-f6074c6e96c7.png)  
+![회원가입](https://user-images.githubusercontent.com/115692844/214156836-8ae5b599-7d88-4706-ac0f-35d0cbf3575b.png)
 
-### yml 설정
+- 프로필 페이지
+![프로필](https://user-images.githubusercontent.com/115692844/214157470-4cbc0c84-b4b7-499a-b905-e2678105af82.png)
 
-```yml
-server:
-  port: 8080
-  servlet:
-    context-path: /
-    encoding:
-      charset: utf-8
-      enabled: true
-    
-spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
-      
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/cos?serverTimezone=Asia/Seoul
-    username: cos
-    password: cos1234
-    
-  jpa:
-    open-in-view: true
-    hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: true
-      
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: 2MB
+- 회원 정보 변경
+![회원 정보 변경](https://user-images.githubusercontent.com/115692844/214157596-6fc7cb72-d590-443c-901c-c889d8c03d00.png)
 
-  security:
-    user:
-      name: test
-      password: 1234   
+- 프로필 사진 변경
+![프로필업로드](https://user-images.githubusercontent.com/115692844/214157696-95b32eb6-0817-4e15-9399-d94d02846265.png)
+![업로드완료](https://user-images.githubusercontent.com/115692844/214157706-c69a7912-b4b5-4198-ad88-913491d020ea.png)
 
-file:
-  path: C:/src/springbootwork-sts/upload/
-```
+- 게시글 업로드
+![사진업로드](https://user-images.githubusercontent.com/115692844/214157809-79bebc54-2a2d-477e-9318-cb4f9999ff6f.png)
+![게시글 업로드 완료](https://user-images.githubusercontent.com/115692844/214157903-ce25a0e2-b2fe-45b8-9c7c-a03dffbc42c5.png)
 
-### 태그라이브러리
+- 좋아요 및 댓글
+![좋아요 및 댓글](https://user-images.githubusercontent.com/115692844/214158016-7cdfeb51-61af-4e09-ad95-4e559b150b08.png)
 
-```jsp
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-```
+-구독 기능
+![구독완료](https://user-images.githubusercontent.com/115692844/214158146-bde681a5-da1b-4bcc-aa87-388ffbd075bc.png)
+![구독정보](https://user-images.githubusercontent.com/115692844/214158155-02ae7d1c-ca4e-4e54-9f48-1519727e756b.png)
+
+-좋아요 순으로 인기 게시글 정렬
+![좋아요 순](https://user-images.githubusercontent.com/115692844/214158301-67a5d44e-5235-496d-9e3f-cc3632c036d9.png)
+
+# 프로젝트 후기
+ 프로젝트를 진행하며 이론을만 배웠던 jpa를 실제로 활용 할 수 있어 더 깊은 이해를 할 수 있었다.
+ 연관관계를 실제로 활용하는 법을 알게 되었으며 특히 N:N 관계를 N:1 1:N으로 바꾸어 좀 더 간편하게 설정할 수 있는 부분을 이해하게 되었다.
+ 스프링 시큐리티와 OAuth2를 어떻게 사용하는 지는 알게 되었으나 깊은 이해를 하지 못했다고 생각하여 따로 공부를 해야 할 필요성을 느끼게 되었다.
